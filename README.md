@@ -1,1 +1,2 @@
-# Hlavni_projekt
+# Kocandrle-Flask
+algoritmizace flask 

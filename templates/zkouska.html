@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% block title %}
+Zkouska
+{% endblock %}
+
+<main>
+    <p>
+        {% if radio %}
+        <p>Vybral jste {{ radio }}</p>
+        {% endif %}
+        {% if username == "admin" and password == "heslo" %}
+        <h3>uspesne prihlaseni {{ username }}</h3>
+        {% elif username == "admin" %}
+        <h3>spatne heslo pro {{ username }}</h3>
+        {% else %}
+        <h3>neplatny utivatel {{ username }}</h3>
+        {% endif %}
+    </p>
+</main>
+
+{% endblock %}
