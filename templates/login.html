@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Přihlášení</h1>
+
+<form method="POST">
+    <label>Uživatelské jméno
+        <input type="text" name="username" placeholder="Vyplňte jméno" required>
+    </label>
+
+    <label>
+        Heslo
+        <input type="password" name="password" placeholder="Heslo" required>
+    </label>
+    <input type="submit" value="Odeslat">
+</form>
+
+
+
+{% endblock %}
