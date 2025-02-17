@@ -1,20 +1,34 @@
 {% extends "base.html" %}
+
 {% block content %}
 
-<h1>Přihlášení</h1>
+{% if username is not defined %}
+    <!-- Zobrazí se přihlašovací formulář -->
+    <h1>Přihlášení</h1>
+    <form method="POST">
+        <label>Uživatelské jméno
+            <input type="text" name="username" placeholder="Vyplňte jméno" required>
+        </label>
 
-<form method="POST">
-    <label>Uživatelské jméno
-        <input type="text" name="username" placeholder="Vyplňte jméno" required>
-    </label>
-
-    <label>
-        Heslo
-        <input type="password" name="password" placeholder="Heslo" required>
-    </label>
-    <input type="submit" value="Odeslat">
-</form>
-
-
+        <label>
+            Heslo
+            <input type="password" name="password" placeholder="Heslo" required>
+        </label>
+        <input type="submit" value="Odeslat">
+    </form>
+{% else %}
+    <!-- Zobrazí se stav po ověření přihlášení -->
+    <main>
+        <p>
+            {% if username == "admin" and password == "password" %}
+            <h3>Úspěšně jste se přihlásil jako {{ username }}</h3>
+            {% elif username == "admin" %}
+            <h3>Špatné heslo pro uživatele {{ username }}</h3>
+            {% else %}
+            <h3>Neplatný uživatel {{ username }}</h3>
+            {% endif %}
+        </p>
+    </main>
+{% endif %}
 
 {% endblock %}
