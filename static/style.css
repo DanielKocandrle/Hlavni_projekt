@@ -152,3 +152,20 @@ main p h3 {
         padding: 15px;
     }
 }
+
+/* Obecný styl pro obrázky */
+img {
+    max-width: 100%; /* Obrázky se přizpůsobí šířce rodiče */
+    height: auto; /* Zachová poměr stran */
+    display: block; /* Odstraní mezery pod obrázkem */
+    margin: 20px auto; /* Zarovná obrázek na střed */
+    border-radius: 15px; /* Zaoblené rohy */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Hezký stín */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animace na hover */
+}
+
+/* Efekt při najetí myší (hover) */
+img:hover {
+    transform: scale(1.05); /* Jemné zvětšení obrázku */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.7); /* Zvýraznění stínu */
+}
