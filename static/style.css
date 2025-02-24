@@ -169,3 +169,32 @@ img:hover {
     transform: scale(1.05); /* Jemné zvětšení obrázku */
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.7); /* Zvýraznění stínu */
 }
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    color: #fff;
+    font-weight: bold;
+}
+
+.flash.success {
+    background-color: #28a745;
+    border-left: 5px solid #218838;
+}
+
+.flash.error {
+    background-color: #dc3545;
+    border-left: 5px solid #bd2130;
+}
+
+.flash.warning {
+    background-color: #ffc107;
+    border-left: 5px solid #e0a800;
+    color: #212529;
+}
+
+.flash .close {
+    position: absolute;
+    right: 10px;
+}
