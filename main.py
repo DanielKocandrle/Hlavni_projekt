@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, flash, url_for
 
 app = Flask(__name__)
+app.secret_key = 'tajny_klic'  # Nutné pro funkčnost flash zpráv
 
 
 @app.route("/")
@@ -23,7 +24,16 @@ def login():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
-        return render_template("login.html", username=username, password=password)
+
+        # Jednoduché ověření uživatele
+        if username == "admin" and password == "password":
+            flash("Úspěšně jste se přihlásil!", "success")
+            return redirect(url_for('home'))  # Přesměrování na hlavní stránku
+        elif username == "admin":
+            flash("Neúspěšné přihlášení", "warning")
+        else:
+            flash("Neúspěšné přihlášení", "error")
+
     return render_template("login.html")
 
 
