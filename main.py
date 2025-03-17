@@ -10,16 +10,15 @@ from os import path
 
 from app.db import create_db
 
-@app.route("/base")
-def base():
-    return render_template("base.html")
-
+ # hlavni blok pro spusteni aplikace
 if __name__ == "__main__":
+    # kontrola jestli existuje databazovy soubor a jestli ne tak se vytvori
     if not path.exists(app.config["DATABASE"]):
         print("inicializace databaze")
         with app.app_context():
-            create_db()
+            create_db()  # vytvoreni databazovych tabulek
 
+    # registrace blueprintů pro prihlaseni a registraci
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(register_bp, url_prefix="/register")
     app.run(debug=True)
