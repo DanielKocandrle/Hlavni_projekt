@@ -2,6 +2,8 @@ from flask import render_template, request, redirect, flash, url_for
 
 from app.auth import bp as auth_bp
 
+from app.register import bp as register_bp
+
 from app import app
 
 from os import path
@@ -19,4 +21,5 @@ if __name__ == "__main__":
             create_db()
 
     app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(register_bp, url_prefix="/register")
     app.run(debug=True)
