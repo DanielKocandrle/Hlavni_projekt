@@ -16,9 +16,9 @@ def login():
         print(result)
 
         if result:
-            flash("login successful", "success")
+            flash("Přihlášení úspěšné", "success")
             return redirect(url_for("index"))
         else:
-            flash("login failed", "danger")
+            flash("Špatné uživatelské jméno nebo heslo", "danger")
 
     return render_template("login.html")
