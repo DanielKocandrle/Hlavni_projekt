@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{% if username is not defined %}
     <!-- Zobrazí se přihlašovací formulář -->
     <h1>Přihlášení</h1>
     <form method="POST">
@@ -16,19 +15,5 @@
         </label>
         <input type="submit" value="Odeslat">
     </form>
-{% else %}
-    <!-- Zobrazí se stav po ověření přihlášení -->
-    <main>
-        <p>
-            {% if username == "admin" and password == "password" %}
-            <h3>Úspěšně jste se přihlásil jako {{ username }}</h3>
-            {% elif username == "admin" %}
-            <h3>Špatné heslo pro uživatele {{ username }}</h3>
-            {% else %}
-            <h3>Neplatný uživatel {{ username }}</h3>
-            {% endif %}
-        </p>
-    </main>
-{% endif %}
 
 {% endblock %}
