@@ -4,9 +4,11 @@ from app.db import execute
 # vytvoření přihlašovacího blueprintu
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
-# přihlášení
 @bp.route("/login", methods=("GET", "POST"))
 def login():
+    """
+    přihlášení pomoci dat z databaze
+    """
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
@@ -23,18 +25,25 @@ def login():
 
     return render_template("login.html")
 
-# odhlášení
 @bp.route("/logout")
 def logout():
-    session.pop('user', None)  # odstraní uživatele ze session
+    """
+    odhlášení a odstranění uživatele ze session
+    """
+    session.pop('user', None)
     flash("Úspěšně jste se odhlásili", "info")
     return redirect(url_for("index"))
+
 
 # blueprint pro uživatelský profil
 user_bp = Blueprint("user", __name__, url_prefix="/user")
 
 @user_bp.route("/")
 def profile():
+    """
+    pokud uzivatel neni prihlasen vypise se flash message
+    pokud je uzivatel prihlasen bude redirectnut na user.html
+    """
     if 'user' not in session:
         flash("Nejste přihlášeni!", "warning")
         return redirect(url_for("auth.login"))

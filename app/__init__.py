@@ -7,11 +7,10 @@ app.config["SECRET_KEY"] = "tajny_klic"
 app.config["DATABASE"] = "database.sqlite" # konfigurace databazove
 app.config["DB_SCHEME"] = "scheme.sql" #konfigururace schematu pro databazi
 
-# definice routy pro hlavni stranku
+
 @app.route("/")
 def index():
     """
-    funce view index
-    :return:
+    definice routy pro hlavni stranku
     """
     return render_template("index.html")
