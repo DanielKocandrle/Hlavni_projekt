@@ -21,14 +21,20 @@
     {% if races %}
         <ul>
             {% for race in races %}
-                <li>
-                    <strong>{{ race.name }}</strong><br>
-                    {{ race.description }}
-                    <form action="{{ url_for('races.delete_race', index=loop.index0) }}" method="POST" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Smazat</button>
-                    </form><br><br><br><br>
-                </li>
-            {% endfor %}
+    <li>
+        <strong>{{ race[1] }}</strong><br>
+        {{ race[2] }}<br>
+        <em>Vytvořil: {{ race[3] }}</em>
+
+        {% if role == 'admin' or current_user == race[3] %}
+            <form action="{{ url_for('races.delete_race', race_id=race[0]) }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Smazat</button>
+            </form>
+        {% endif %}
+        <br><br>
+    </li>
+{% endfor %}
+
         </ul>
     {% else %}
         <p>Žádné závody zatím nejsou přidány.</p>
