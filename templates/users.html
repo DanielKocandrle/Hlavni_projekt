@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <body>
     <h1>Seznam uživatelů</h1>
 
@@ -23,6 +22,7 @@
                             <form action="{{ url_for('admin.delete_user', username=user[0]) }}" method="POST">
                                 <button type="submit" class="btn btn-danger">Smazat</button>
                             </form>
+                            <a href="{{ url_for('admin.change_password', username=user[0]) }}" class="btn btn-warning">Změnit heslo</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -31,6 +31,5 @@
     {% else %}
         <p>Žádní uživatelé nebyli nalezeni.</p>
     {% endif %}
-
 </body>
 {% endblock %}

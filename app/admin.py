@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, flash, redirect, url_for
+from flask import Blueprint, render_template, session, flash, redirect, url_for, request
 from app import db
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
@@ -55,3 +55,23 @@ def delete_user(username):
     db.execute(command, {"username": username})
     flash(f"Uživatel {username} byl úspěšně smazán.", "success")
     return redirect(url_for("admin.list_users"))
+
+@admin_bp.route("/change_password/<username>", methods=["GET", "POST"])
+def change_password(username):
+    """
+    Umožní adminovi změnit heslo pro konkrétního uživatele.
+    """
+    if 'user' not in session or session.get('role') != 'admin':
+        flash("Přístup odepřen.", "danger")
+        return redirect(url_for("index"))
+
+    if request.method == "POST":
+        new_password = request.form["new_password"]
+
+        # Příkaz pro aktualizaci hesla uživatele
+        command = "UPDATE users SET password = :password WHERE username = :username"
+        db.execute(command, {"password": new_password, "username": username})
+        flash(f"Heslo uživatele {username} bylo úspěšně změněno.", "success")
+        return redirect(url_for("admin.list_users"))
+
+    return render_template("change_password.html", username=username)
