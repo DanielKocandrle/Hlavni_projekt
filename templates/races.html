@@ -18,23 +18,24 @@
     <hr>
 
     <h2>Seznam závodů</h2>
+
     {% if races %}
         <ul>
             {% for race in races %}
-    <li>
-        <strong>{{ race[1] }}</strong><br>
-        {{ race[2] }}<br>
-        <em>Vytvořil: {{ race[3] }}</em>
+                <li>
+                    <strong>{{ race[1] }}</strong><br>
+                    {{ race[2] }}<br>
+                    <em>Vytvořil: {{ race[3] }}</em>
 
-        {% if role == 'admin' or current_user == race[3] %}
-            <form action="{{ url_for('races.delete_race', race_id=race[0]) }}" method="POST" style="display:inline;">
-                <button type="submit" class="btn btn-danger">Smazat</button>
-            </form>
-        {% endif %}
-        <br><br>
-    </li>
-{% endfor %}
-
+                    <!-- Pokud je uživatel admin nebo je to závod, který vytvořil aktuální uživatel -->
+                    {% if role == 'admin' or session['user'] == race[3] %}
+                        <form action="{{ url_for('races.delete_race', race_id=race[0]) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Smazat</button>
+                        </form>
+                    {% endif %}
+                    <br><br>
+                </li>
+            {% endfor %}
         </ul>
     {% else %}
         <p>Žádné závody zatím nejsou přidány.</p>
