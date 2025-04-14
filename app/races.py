@@ -21,3 +21,21 @@ def races():
 
     races_list = session.get('races', [])
     return render_template("races.html", races=races_list)
+
+@races_bp.route("/delete_race/<int:index>", methods=["POST"])
+def delete_race(index):
+    """
+    Smaže závod na základě indexu z session.
+    """
+    if 'races' in session:
+        try:
+            # Smažeme závod podle indexu
+            session['races'].pop(index)
+            session.modified = True  # nutné pro změny v session
+            flash("Závod byl úspěšně smazán.", "success")
+        except IndexError:
+            flash("Závod nebyl nalezen.", "danger")
+    else:
+        flash("Není žádný závod k odstranění.", "danger")
+
+    return redirect(url_for("races.races"))
