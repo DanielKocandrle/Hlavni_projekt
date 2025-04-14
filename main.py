@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, flash, url_for
 
+from app.admin import admin_bp
 from app.auth import bp as auth_bp
 
 from app.register import bp as register_bp
@@ -12,6 +13,8 @@ from app.db import create_db
 
 from app.user import user_bp
 
+from app.races import races_bp
+
  # hlavni blok pro spusteni aplikace
 if __name__ == "__main__":
     # kontrola jestli existuje databazovy soubor a jestli ne tak se vytvori
@@ -23,7 +26,10 @@ if __name__ == "__main__":
     # registrace blueprintů pro prihlaseni a registraci
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(register_bp, url_prefix="/register")
-
     app.register_blueprint(user_bp, url_prefix="/user")
+    app.register_blueprint(races_bp, url_prefix="/races")
+
+    app.register_blueprint(admin_bp, url_prefix="/admin")
+
 
     app.run(debug=True)

@@ -14,10 +14,13 @@ def login():
         password = request.form['password']
 
         command = "SELECT username FROM users WHERE username = ? AND password = ?"
+        role = "SELECT role FROM users WHERE username = ?"
         result = execute(command, (username, password))
+        res2 = execute(role, (username,))
 
         if result:
             session['user'] = username  # uloží uživatele do session
+            session['role'] = res2[0][0]
             flash("Přihlášení úspěšné", "success")
             return redirect(url_for("user.profile"))
         else:
@@ -31,6 +34,7 @@ def logout():
     odhlášení a odstranění uživatele ze session
     """
     session.pop('user', None)
+    session.pop('role', None)
     flash("Úspěšně jste se odhlásili", "info")
     return redirect(url_for("index"))
 

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Závody</h1>
+
+    <form method="POST">
+        <label>Jméno závodu
+            <input type="text" name="name" placeholder="Vyplňte jméno závodu" required>
+        </label>
+
+        <label>
+            Popis
+            <input type="text" name="description" placeholder="Popis závodu" required>
+        </label>
+        <input type="submit" value="Odeslat">
+    </form>
+
+    <hr>
+
+    <h2>Seznam závodů</h2>
+    {% if races %}
+        <ul>
+            {% for race in races %}
+                <li>
+                    <strong>{{ race.name }}</strong><br>
+                    {{ race.description }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Žádné závody zatím nejsou přidány.</p>
+    {% endif %}
+{% endblock %}
