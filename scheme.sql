@@ -1,9 +1,9 @@
 -- Tabulka uživatelů
 CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     username VAR UNIQUE NOT NULL,
     password VARCHAR NOT NULL,
-    role VAR NOT NULL
+    role VAR NOT NULL DEFAULT 'user'
 );
 
 INSERT INTO users (username, password, role)
@@ -13,7 +13,7 @@ VALUES
 
 -- Tabulka závodů s user_id a AUTOINCREMENT
 CREATE TABLE races (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     name VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
     user_id INTEGER NOT NULL,

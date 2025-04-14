@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session, flash, redirect, url_for
 
+from app.db import execute
 user_bp = Blueprint("user", __name__, url_prefix="/user")
 
 # definice routy pro user stranku
@@ -12,3 +13,4 @@ def profile():
         flash("Nejste přihlášeni!", "warning")
         return redirect(url_for("auth.login"))
     return render_template("user.html", username=session['user'])
+

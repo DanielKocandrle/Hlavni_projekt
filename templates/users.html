@@ -11,13 +11,19 @@
                 <tr>
                     <th>Uživatelské jméno</th>
                     <th>Role</th>
+                    <th>Akce</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                     <tr>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.role }}</td>
+                        <td>{{ user[0] }}</td>
+                        <td>{{ user[1] }}</td>
+                        <td>
+                            <form action="{{ url_for('admin.delete_user', username=user[0]) }}" method="POST">
+                                <button type="submit" class="btn btn-danger">Smazat</button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
